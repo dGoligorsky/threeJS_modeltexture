@@ -29,6 +29,7 @@
 			var object;
 			var plane;
 			var scaleFactor = 100;
+			var start = Date.now();
 			init();
 			animate();
 			function init() {
@@ -49,7 +50,7 @@
 				plane.position.y = -100;
 				plane.rotation.x = - Math.PI / 2;
 				scene.add( plane );
-				
+
 
 				// manager
 				function loadModel() {
@@ -105,10 +106,16 @@
 				render();
 			}
 			function render() {
+
+				var timer = Date.now() - start;
+				object.rotation.y = Math.abs( Math.sin( timer * 0.00001 ) ) * 150;
+				plane.rotation.z =  Math.abs( Math.sin( timer * 0.00001 ) ) * 150;
+
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
 				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 				camera.lookAt( scene.position );
 				renderer.render( scene, camera );
+
 			}
 		</script>
 
